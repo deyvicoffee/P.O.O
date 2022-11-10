@@ -16,21 +16,20 @@ public class Aluno extends Pessoa{
     
     //Métodos
     public void cancelarMatr(){
-        System.out.print("Você quer realmente cancelar a sua matrícula? (S/N) : ");
+        System.out.print("\nVocê quer realmente cancelar a sua matrícula? (S/N) : ");
         Scanner in = new Scanner(System.in);
         String opc = in.nextLine();
-        System.out.println("\n");
-        
+        System.out.println("");
         if(opc.equals("S") || opc.equals("s")){
             if(this.isMatriculado()){
                 this.setMatriculado(false);
                 this.setCurso(null);
-                System.out.println("Matrícula cancelada.\n");
+                System.out.println("Matrícula cancelada.");
             }else{
                 System.out.println("Não é possível cancelar a matrícula pois esta pessoa não está matriculado(a).");
             }
         }else if(opc.equals("N") || opc.equals("n")){
-            System.out.println("Operação cancelada.\n");
+            System.out.println("Operação cancelada.");
         }else{
             System.out.println("Opção inválida, não foi possível cancelar a matrícula.\n");
         }

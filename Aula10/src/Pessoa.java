@@ -9,8 +9,6 @@ public class Pessoa {
     //Métodos
     public void fazerAniv(){
         this.setIdade(this.getIdade() + 1);
-        
-        System.out.println("Agora " + this.getNome() +" tem " + this.getIdade() + " anos de idade\n");
     }
 
     //Métodos especiais

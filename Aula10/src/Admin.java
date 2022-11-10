@@ -42,7 +42,4 @@ public class Admin extends Pessoa{
     public String getSenha() {
         return senha;
     }
-
-    
-    
 }

@@ -8,7 +8,6 @@ public class Professor extends Pessoa{
     //Métodos
     public void receberAum(float aum){
         this.setSalario(this.getSalario() + aum);
-        System.out.println("Parabéns! Agora seu novo salário é de R$" + this.getSalario() + " reais.\n");
     }
     
     //Métodos especiais

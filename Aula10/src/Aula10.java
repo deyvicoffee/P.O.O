@@ -12,18 +12,19 @@ public class Aula10 {
         Vector<Professor> professores = new Vector<Professor>();
         Scanner in = new Scanner(System.in);
         int idade;
-        int num = 0;
-        int index = num - 1;
+        int num;
         String nome;
         String sexo;
 
-        System.out.print("--- PESQUISA DE OCUPAÇÃO DA POPULAÇÃO BRASILEIRA ---");
+        System.out.println("--- PESQUISA DE OCUPAÇÃO DA POPULAÇÃO BRASILEIRA ---");
 
         System.out.println("Selecione uma opção: ");
         menu();
 
         int opcao = in.nextInt();
 
+        System.out.println("");
+        
         do {
             switch (opcao) {
                 case 1: //RESPONDER PESQUISA
@@ -35,13 +36,15 @@ public class Aula10 {
                         System.out.println("2 - Funcionário");
                         System.out.println("3 - Professor");
                         System.out.print("Opção: ");
-                        in.nextInt();
-
+                        opc = in.nextInt();
+                        
                         if (opc != 1 && opc != 2 && opc != 3) {
-                            System.out.println("Opção inválida! Por favor insira o número corresponde as opções abaixo.\n");
+                            System.out.println("\nOpção inválida! Por favor insira o número corresponde as opções abaixo.\n");
                         }
                     } while (opc != 1 && opc != 2 && opc != 3);
-
+                    
+                    in.nextLine();
+                    
                     switch (opc) {
                         case 1:
                             Aluno aluno = new Aluno();
@@ -125,25 +128,32 @@ public class Aula10 {
                 break;
 
                 case 2://LISTAR INFORMAÇÕES
-                    System.out.println("--- LISTA DE ALUNOS ---");
-                    for (int i = 0; i < alunos.size(); i++) {
-                        alunos.get(i).status();
+                    if(!alunos.isEmpty()){
+                        System.out.println("--- LISTA DE ALUNOS ---");
+                        for (int i = 0; i < alunos.size(); i++) {
+                            alunos.get(i).status();
+                        }
                     }
-
-                    System.out.println("--- LISTA DE FUNCIONÁRIOS ---");
-                    for (int i = 0; i < funcionarios.size(); i++) {
-                        funcionarios.get(i).status();
+                    
+                    if(!funcionarios.isEmpty()){
+                        System.out.println("--- LISTA DE FUNCIONÁRIOS ---");
+                        for (int i = 0; i < funcionarios.size(); i++) {
+                            funcionarios.get(i).status();
+                        }
                     }
-
-                    System.out.println("--- LISTA DE PROFESSORES ---");
-                    for (int i = 0; i < professores.size(); i++) {
-                        professores.get(i).status();
+                    
+                    if(!professores.isEmpty()){
+                        System.out.println("--- LISTA DE PROFESSORES ---");
+                        for (int i = 0; i < professores.size(); i++) {
+                            professores.get(i).status();
+                        }
                     }
                 break;
 
                 case 3://ALTERAR INFORMAÇÕES
                     Admin adm = new Admin();
 
+                    in.nextLine();
                     System.out.print("Login: ");
                     String login = in.nextLine();
 
@@ -151,105 +161,118 @@ public class Aula10 {
                     String senha = in.nextLine();
 
                     if (adm.checarLogin(login) && adm.checarSenha(senha)) {
-                        System.out.println("Bem vindo de volta " + adm.getNome() + "!");
+                        System.out.println("\nBem vindo de volta " + adm.getNome() + "!\n");
 
                         int choice = 0;
                         do {
-                            System.out.println("A pessoa que você deseja alterar possui qual ocupacao?");
+                            System.out.println("A pessoa que você deseja alterar possui qual ocupação?");
                             System.out.println("1 - Aluno");
                             System.out.println("2 - Funcionário");
                             System.out.println("3 - Professor");
+                            System.out.println("0 - Voltar");
                             System.out.print("Opção: ");
-                            opc = in.nextInt();
+                            choice = in.nextInt();
 
-                            if (choice != 1 && choice != 2 && choice != 3) {
-                                System.out.println("Opção inválida, vamos tentar de novo?\n");
+                            if (choice != 0 && choice != 1 && choice != 2 && choice != 3) {
+                                System.out.println("\nOpção inválida, vamos tentar de novo?\n");
                             }
-
-                        } while (choice != 1 && choice != 2 && choice != 3);
+                            else if(choice == 1 && alunos.isEmpty()){
+                                System.out.println("\nInfelizmente a pesquisa não possui alunos para serem alterados.\n");
+                                choice = 0;
+                            }
+                            else if(choice == 2 && funcionarios.isEmpty()){
+                                System.out.println("\nInfelizmente a pesquisa não possui funcionários para serem alterados. Por favor tente novamente.");
+                                choice = 0;
+                            }
+                            else if(choice == 3 && professores.isEmpty()){
+                                System.out.println("\nInfelizmente a pesquisa não possui professores para serem alterados. Por favor tente novamente.");
+                                choice = 0;
+                            }
+                            else if(choice == 0){
+                                System.out.println("");
+                            }
+                        } while (choice != 0 && choice != 1 && choice != 2 && choice != 3);
 
                         switch (choice) {
                             case 1:
                                 do {
-                                    System.out.println("Selecione o número correspondente ao aluno que deseja alterar");
+                                    System.out.println("\nSelecione o número correspondente ao aluno que deseja alterar.\n");
 
                                     for (int i = 0; i < alunos.size(); i++) {
-                                        System.out.println("\t(" + i + 1 + ")");
+                                        System.out.println("\t(" + (i + 1) + ")");
                                         alunos.get(i).status();
                                     }
 
                                     System.out.print("Número: ");
                                     num = in.nextInt();
 
-                                    System.out.println("");
-
                                     if (num > alunos.size() || num == 0) {
-                                        System.out.println("\nNúmero inválido.");
+                                        System.out.print("\nNúmero inválido.");
                                     }
                                     else {
                                         int option = 0;
                                         do {
                                             System.out.println("\nAluno escolhido:");
                                             
-                                            alunos.get(index).status();
+                                            alunos.get(num - 1).status();
 
                                             System.out.println("Quais alterações você deseja fazer?");
                                             System.out.println("1 - Atualizar idade.");
                                             System.out.println("2 - Alterar estado da matrícula");
+                                            System.out.print("Opção: ");
                                             option = in.nextInt();
 
                                             if (option != 1 && option != 2) {
-                                                System.out.print("Opção inválida.");
+                                                System.out.println("\nOpção inválida.");
                                             } 
                                             else if (option == 1) {
-                                                alunos.get(index).fazerAniv();
+                                                alunos.get(num - 1).fazerAniv();
                                             } 
                                             else if (option == 2) {
                                                 int opcion = 0;
                                                 do{
-                                                    System.out.println("Qual o novo estado da matricula?");
+                                                    System.out.println("\nQual o novo estado da matricula?");
                                                     System.out.println("1 - Matriculado.");
                                                     System.out.println("2 - Não matriculado.");
                                                     System.out.println("3 - Cancelar matricula.");
+                                                    System.out.print("Opção: ");
                                                     opcion = in.nextInt();
-                                                    
+
                                                     if(opcion != 1 && opcion != 2 && opcion != 3){
-                                                        System.out.println("Opção inválida.");
+                                                        System.out.println("\nOpção inválida.");
                                                     }
                                                     else if (opcion == 1){
-                                                        alunos.get(index).setMatriculado(true);
+                                                        alunos.get(num - 1).setMatriculado(true);
                                                     }
                                                     else if (opcion == 2){
-                                                        alunos.get(index).setMatriculado(false);
+                                                        alunos.get(num - 1).setMatriculado(false);
                                                     }
                                                     else{
-                                                        alunos.get(index).cancelarMatr();
+                                                        alunos.get(num - 1).cancelarMatr();
                                                     }
                                                 }while(opcion != 1 && opcion != 2 && opcion != 3);
                                             }
 
                                         } while (option != 1 && option != 2);
                                     }
-                                } while (num > alunos.size());
+                                } while (num > alunos.size() || num == 0);
                                 
-                                System.out.println("Informações atualizadas!");
-                                alunos.get(index).status();
+                                System.out.println("\nInformações atualizadas!");
+                                alunos.get(num - 1).status();
                                 
                             break;
                             
                             case 2:
                                 do {
-                                    System.out.println("Selecione o número correspondente ao funcionario que deseja alterar");
+                                    System.out.println("Selecione o número correspondente ao funcionario que deseja alterar.\n");
 
                                     for (int i = 0; i < funcionarios.size(); i++) {
-                                        System.out.println("\t(" + i + 1 + ")");
+                                        System.out.println("\t(" + (i + 1) + ")");
                                         funcionarios.get(i).status();
                                     }
 
                                     System.out.print("Número: ");
                                     num = in.nextInt();
-
-                                    System.out.println("");
 
                                     if (num > funcionarios.size() || num == 0) {
                                         System.out.println("\nNúmero inválido.");
@@ -257,78 +280,78 @@ public class Aula10 {
                                         int option = 0;
                                         do {
                                             System.out.println("\nFuncionario escolhido:");
-                                            funcionarios.get(index).status();
+                                            funcionarios.get(num - 1).status();
                                             System.out.println("Quais alterações você deseja fazer?");
                                             System.out.println("1 - Atualizar idade.");
                                             System.out.println("2 - Alterar estado do trabalho.");
+                                            System.out.print("Opção: ");
                                             option = in.nextInt();
 
                                             if (option != 1 && option != 2) {
-                                                System.out.print("Opção inválida.");
+                                                System.out.println("\nOpção inválida.");
                                             } 
                                             else if (option == 1) {
-                                                funcionarios.get(index).fazerAniv();
+                                                funcionarios.get(num - 1).fazerAniv();
                                             } 
                                             else if (option == 2) {
-                                                funcionarios.get(index).mudarTrabalho();
+                                                funcionarios.get(num - 1).mudarTrabalho();
                                             }
 
                                         } while (option != 1 && option != 2);
                                     }
-                                } while (num > alunos.size());
+                                } while (num > funcionarios.size() || num == 0);
                             
-                                System.out.println("Informações atualizadas!");
-                                funcionarios.get(index).status();
+                                System.out.println("\nInformações atualizadas!");
+                                funcionarios.get(num - 1).status();
                             break;
                             
                             case 3:
                                 do {
-                                    System.out.println("Selecione o número correspondente ao professor que deseja alterar");
+                                    System.out.println("Selecione o número correspondente ao professor que deseja alterar.\n");
 
                                     for (int i = 0; i < professores.size(); i++) {
-                                        System.out.println("\t(" + i + 1 + ")");
+                                        System.out.println("\t(" + (i + 1) + ")");
                                         professores.get(i).status();
                                     }
 
                                     System.out.print("Número: ");
                                     num = in.nextInt();
-
                                     System.out.println("");
-
                                     if (num > professores.size() || num == 0) {
-                                        System.out.println("\nNúmero inválido.");
+                                        System.out.println("Número inválido.");
                                     } else {
                                         int option = 0;
                                         do {
                                             System.out.println("\nProfessor escolhido:");
-                                            professores.get(index).status();
+                                            professores.get(num - 1).status();
                                             System.out.println("Quais alterações você deseja fazer?");
                                             System.out.println("1 - Atualizar idade.");
                                             System.out.println("2 - Informar aumento de salário.");
+                                            System.out.print("Opção: ");
                                             option = in.nextInt();
 
                                             if (option != 1 && option != 2) {
-                                                System.out.print("Opção inválida.");
+                                                System.out.println("\nOpção inválida.");
                                             } 
                                             else if (option == 1) {
-                                                professores.get(index).fazerAniv();
+                                                professores.get(num - 1).fazerAniv();
                                             } 
                                             else if (option == 2) {
-                                                System.out.print("Valor do aumento: ");
+                                                System.out.print("\nValor do aumento: ");
                                                 float aumento = in.nextFloat();
-                                                professores.get(index).receberAum(aumento);
+                                                professores.get(num - 1).receberAum(aumento);
                                             }
 
                                         } while (option != 1 && option != 2);
                                     }
-                                } while (num > alunos.size());
+                                } while (num > professores.size() || num == 0);
                             
-                                System.out.println("Informações atualizadas!");
-                                professores.get(index).status();
+                                System.out.println("\nInformações atualizadas!");
+                                professores.get(num - 1).status();
                             break;
                         }
                     } else {
-                        System.out.println("Você não possui autorização para fazer modificações nas informações de outros usuários.");
+                        System.out.println("\nVocê não possui autorização para fazer modificações nas informações de outros usuários.\n");
                     }
 
                 break;
@@ -338,13 +361,23 @@ public class Aula10 {
                 System.out.println("Opcao invalida, por favor digite o numero correspondente a uma das opções abaixo:");
                 menu();
                 opcao = in.nextInt();
+                System.out.println("");
             } else {
                 System.out.println("O que você deseja fazer agora?");
                 menu();
                 opcao = in.nextInt();
+                System.out.println("");
             }
 
         } while (opcao != 0);
+        
+        System.out.println("Dados enviados.\n");
+        
+        System.out.println("Obrigado por partipar desta pesquisa!");
+        
+        alunos.clear();
+        funcionarios.clear();
+        professores.clear();   
     }
 
     public static void menu() {
