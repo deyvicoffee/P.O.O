@@ -15,6 +15,11 @@ public class Tecnico extends Aluno{
     
     //Outros métodos
     public void praticar(){
-        
+        System.out.println("Praticando...\n");
+    }
+
+    @Override
+    public String toString() {
+        return "Tecnico{" + "nome=" + nome + ", regProfissional=" + regProfissional + '}';
     }
 }

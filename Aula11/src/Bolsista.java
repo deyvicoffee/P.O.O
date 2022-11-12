@@ -19,7 +19,33 @@ public class Bolsista extends Aluno{
     }
    
     //Outros métodos
-    public void pagarMensal(){
+    public void renovarBolsa(){
+        System.out.println("Renovando bolsa do aluno " + this.nome + "...");
         
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException ex) {
+            System.out.println("error");
+        }
+        
+        System.out.println("Bolsa renovada!\n");
     }
+    
+    
+    @Override
+    public void pagarMensal(){
+        /**
+         * Como bolsista paga mensalidade de forma diferente esse métodos deverá ser sobrescrito/sobreposto
+         * ao da classe progenitora.
+         */
+        
+        System.out.println(this.nome + " é um bolsista! Pagamento facilitado.\n");
+    }
+
+    @Override
+    public String toString() {
+        return "Bolsista{" + "nome=" + nome + ", bolsa=" + bolsa + '}';
+    }
+    
+    
 }

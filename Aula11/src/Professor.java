@@ -23,7 +23,14 @@ public class Professor extends Pessoa{
     }
     
     //Outros métodos
-    public void receberAum(){
-        
+    public void receberAum(Float aum){
+        this.setSalario(this.getSalario() + aum);
+        System.out.println("Aumento realizado! Salário atual: R$" + this.getSalario() + " reais\n");
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" + "nome=" + nome + ", especialidade=" + especialidade + ", salario=" + salario + '}';
+    }
+    
 }
